@@ -16,6 +16,10 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
     if (err) {
       throw err;
     } else {
+      console.log(req.body);
+      const { users } = await pusher.get({
+        path: "/channels/[channel_name]/users",
+      });
       const auth = pusher.authenticate(
         req.body.socket_id,
         req.body.channel_name,
@@ -23,9 +27,12 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
           user_id: crypto.randomUUID(),
           user_info: {
             publicKey: req.body.publicKey,
+            name: req.body.name,
+            isHost: users.length === 0,
           },
         }
       );
+      console.log(auth);
       res.status(200).json(auth);
     }
   });
