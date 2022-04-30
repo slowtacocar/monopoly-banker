@@ -1,0 +1,13 @@
+{
+  "name": "@monopoly-banker/api",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "cors": "^2.8.5",
+    "pusher": "^5.1.0-beta"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.12",
+    "@vercel/node": "^1.15.0"
+  }
+}
