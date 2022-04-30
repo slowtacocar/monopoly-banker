@@ -16,9 +16,8 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
     if (err) {
       throw err;
     } else {
-      console.log(req.body);
       const { users } = await pusher.get({
-        path: "/channels/[channel_name]/users",
+        path: `/channels/${req.body.channel_name}/users`,
       });
       const auth = pusher.authenticate(
         req.body.socket_id,
@@ -32,7 +31,6 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
           },
         }
       );
-      console.log(auth);
       res.status(200).json(auth);
     }
   });
