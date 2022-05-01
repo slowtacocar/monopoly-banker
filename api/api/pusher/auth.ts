@@ -27,7 +27,7 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
           user_info: {
             publicKey: req.body.publicKey,
             name: req.body.name,
-            isHost: users.length === 0,
+            isHost: users?.length === 0,
           },
         }
       );
