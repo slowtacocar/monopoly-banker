@@ -19,7 +19,7 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
       const data = await pusher.get({
         path: `/channels/${req.body.channel_name}/users`,
       });
-      console.log(data);
+      const { users } = await data.json();
       const auth = pusher.authenticate(
         req.body.socket_id,
         req.body.channel_name,
@@ -28,7 +28,7 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
           user_info: {
             publicKey: req.body.publicKey,
             name: req.body.name,
-            isHost: !data || data.length === 0,
+            isHost: users.length === 0,
           },
         }
       );
